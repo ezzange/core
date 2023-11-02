@@ -1,24 +1,14 @@
-package hello.core.xml;
+package hello.core.beandefinition;
 
-import hello.core.member.MemberService;
-import org.assertj.core.api.Assertions;
+import hello.core.AppConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class XmlAppContext {
+public class BeanDefinitionTest {
 
-    //        ApplicationContext ac = new GenericXmlApplicationContext("appConfig.xml");
-    GenericXmlApplicationContext ac = new GenericXmlApplicationContext("appConfig.xml");
-    @Test
-    void xmlAppContext() {
-
-        MemberService memberService = ac.getBean("memberService", MemberService.class);
-        Assertions.assertThat(memberService).isInstanceOf(MemberService.class);
-
-    }
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
     @Test
     @DisplayName("빈 설정 메타정보 확인")
