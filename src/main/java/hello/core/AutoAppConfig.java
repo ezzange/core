@@ -18,14 +18,14 @@ import org.springframework.context.annotation.FilterType;
 public class AutoAppConfig {
 
     //같은 이름으로 수동 등록
-    @Bean(name = "memoryMemberRepository")
-    MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
-    }
-
-    @Bean
-    OrderServiceImpl orderService(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        return new OrderServiceImpl(memberRepository, discountPolicy);
-    }
+//    @Bean(name = "memoryMemberRepository")
+//    MemberRepository memberRepository() {
+//        return new MemoryMemberRepository();
+//    }
+//
+//    @Bean
+//    OrderServiceImpl orderService(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        return new OrderServiceImpl(memberRepository, discountPolicy);
+//    }
 }
 
