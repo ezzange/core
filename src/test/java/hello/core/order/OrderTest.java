@@ -21,6 +21,7 @@ public class OrderTest {
         memberService = appConfig.memberService();
         orderService = appConfig.orderService();
     }
+
     @Test
     void createOrder() {
         //given
@@ -34,16 +35,16 @@ public class OrderTest {
     }
 
 
-    @Test
-    void fieldInjectionTest(){
-        OrderServiceImpl orderService1 = new OrderServiceImpl();
-
-        orderService1.setMemberRepository(new MemoryMemberRepository());
-        orderService1.setDiscountPolicy(new FixDiscountPolicy());
+//    @Test
+//    void fieldInjectionTest(){
+//        OrderServiceImpl orderService1 = new OrderServiceImpl();
+//
+//        orderService1.setMemberRepository(new MemoryMemberRepository());
+//        orderService1.setDiscountPolicy(new FixDiscountPolicy());
 
 //        orderService1.createOrder(1L, "itemA", 10000);
-
+//}
 
 
     }
-}
+
