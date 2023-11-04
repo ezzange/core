@@ -1,8 +1,9 @@
 package hello.core.scan;
 
 import hello.core.AutoAppConfig;
-import hello.core.member.Member;
+import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
+import hello.core.order.OrderServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -22,6 +23,12 @@ public class AutoAppConfigTest {
         // ( 개발자의 의도로 빈을 생성할 경우 나중에 야기될 예외 상황을 미리 방지 )
         //  수동 등록 빈으로 사용하고 싶다면 application.properties 에
         //  빈 재정의를 활성화 시키는 설정인 spring.main.allow-bean-definition-overriding=true를 추가 해야 한다.
+
+
+        OrderServiceImpl bean = ac.getBean(OrderServiceImpl.class);
+        MemberRepository memberRepository = bean.getMemberRepository();
+        System.out.println("memberRepository = " + memberRepository);
+
 
     }
 }

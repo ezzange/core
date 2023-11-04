@@ -1,8 +1,10 @@
 package hello.core;
 
-import hello.core.member.Member;
-import hello.core.member.MemberRepository;
-import hello.core.member.MemoryMemberRepository;
+import hello.core.discount.DiscountPolicy;
+import hello.core.member.*;
+import hello.core.order.Order;
+import hello.core.order.OrderServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,11 @@ public class AutoAppConfig {
     @Bean(name = "memoryMemberRepository")
     MemberRepository memberRepository() {
         return new MemoryMemberRepository();
+    }
+
+    @Bean
+    OrderServiceImpl orderService(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        return new OrderServiceImpl(memberRepository, discountPolicy);
     }
 }
 
