@@ -2,7 +2,11 @@ package hello.core.lifecycle;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
-                            //초기화, 소멸 인터페이스 사용  implements InitializingBean, DisposableBean
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+//초기화, 소멸 인터페이스 사용  implements InitializingBean, DisposableBean
 public class NetworkClient{
     private String url;
     public NetworkClient() {
@@ -28,12 +32,14 @@ public class NetworkClient{
     public void disconnect() {
         System.out.println("close :" + url);
     }
-
+    //annotation을 사용한 빈의 소멸, 초기화  - 외부 라이브러리에 적용 불가 외부 라이브러리를 초기화, 종료 해야한다면 @Bean의 기능 사용
+    @PostConstruct
     public void init(){
         System.out.println("NetworkClient.init");
         connect();
         call("초기화 연결 메세지");
     }
+    @PreDestroy
     public void close() {
         System.out.println("NetworkClient.close");
         disconnect();
