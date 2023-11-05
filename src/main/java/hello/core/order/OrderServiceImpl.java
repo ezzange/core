@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -21,25 +20,26 @@ public class OrderServiceImpl implements OrderService{
     //구현체에만 의존하지 않고 인터페이스만 의존하는 코드 이지만 해당 코드로는 원하는 구현체로 연결되지 않아 nullpoint예외가 발생한다.
     //이 문제를 해결하기 위해서는 개발자대신 클라이언트의 구현 객체를 대신 생성하고 주입해줄 중간조율자가 필요하다.
 
-    //DIP 규칙을 올바르게 지키고 있다. ( 수정자 주입을 위해 주석처리)
+    //DIP 규칙을 올바르게 지키고 있다. ( 수정자 주입을 위해 주석 처리)
      private final MemberRepository memberRepository;
      private final DiscountPolicy discountPolicy;
 
 //     private  MemberRepository memberRepository;
 //     private  DiscountPolicy discountPolicy;
+//    public OrderServiceImpl(){
+//        //기본 생성자
+//    }
 
     //생성자 주입 => 생성자를 호출하면서 빈을 등록하고 의존관계를 같이 주입한다.
     @Autowired (required = false)//주입할 대상이 없어도 동작하게 하 려면 `@Autowired(required = false)` 로 지정
     //생성자가 하나일 경우 생략
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) { //생성자 주입
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy ratediscountPolicy) { //생성자 주입
         System.out.println("생성자 주입 | memberRepository = " + memberRepository);
-        System.out.println("생성자 주입 | discountPolicy = " + discountPolicy);
+        System.out.println("생성자 주입 | ratediscountPolicy = " + ratediscountPolicy);
         this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
+        this.discountPolicy = ratediscountPolicy;
     }
-//    public OrderServiceImpl(){
-//        //기본 생성자
-//    }
+
 
 // 필드에 직접 주입
 //    @Autowired private  MemberRepository memberRepository;
