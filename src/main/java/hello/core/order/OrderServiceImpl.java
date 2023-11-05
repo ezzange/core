@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
@@ -33,11 +34,11 @@ public class OrderServiceImpl implements OrderService{
     //생성자 주입 => 생성자를 호출하면서 빈을 등록하고 의존관계를 같이 주입한다.
     @Autowired (required = false)//주입할 대상이 없어도 동작하게 하 려면 `@Autowired(required = false)` 로 지정
     //생성자가 하나일 경우 생략
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy ratediscountPolicy) { //생성자 주입
+    public OrderServiceImpl(MemberRepository memberRepository,@MainDiscountPolicy DiscountPolicy discountPolicy) { //생성자 주입
         System.out.println("생성자 주입 | memberRepository = " + memberRepository);
-        System.out.println("생성자 주입 | ratediscountPolicy = " + ratediscountPolicy);
+        System.out.println("생성자 주입 | discountPolicy = " + discountPolicy);
         this.memberRepository = memberRepository;
-        this.discountPolicy = ratediscountPolicy;
+        this.discountPolicy = discountPolicy;
     }
 
 
