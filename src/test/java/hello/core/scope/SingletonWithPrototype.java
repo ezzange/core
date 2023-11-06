@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 import static org.assertj.core.api.Assertions.*;
 // 매번 요청에 따라 생성해서 반환하는 프로토타입의 빈과 한 번 생성하여 요청에 따라 같은 빈을 반복 반환하는 싱글톤 빈을 함꼐 사용할 때는
@@ -39,16 +40,14 @@ public class SingletonWithPrototype {
         assertThat(count2).isEqualTo(2);
     }
 
+//Provider : DL을 위한 편의 기능을 제공하는 자바 표준으로 ㄴ ㅍ       ㅋ -ㅣㅡ ,,,,,,,,,,ㅏㅐ;ㅑㅏㅏㅣ,ㅏㅠㅗ  ㅕㅓ                                                                                                                           순환 참조 문제가 발생할 때 사용할 수 있다.
     @Scope("singleton")
     static class ClientBean {
-        public final PrototypeBean prototypeBean; //생성 시점에 의존 관계 주입
-
         @Autowired
-        public ClientBean(PrototypeBean prototypeBean) {
-            this.prototypeBean = prototypeBean;
-        }
+        public Provider<PrototypeBean>  prototypeBeanProvider;
 
         public int logic() {
+            PrototypeBean prototypeBean = prototypeBeanProvider.get();
             prototypeBean.addCount(); //주입이 끝난 빈을 같이 사용
             int count = prototypeBean.getCount();
             return count;
